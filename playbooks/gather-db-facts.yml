@@ -1,0 +1,10 @@
+# Playbook to gather DB facts.
+# Before executing this playbook, please refer the documentation inside the collection_dir/docs directory.
+#
+- hosts: localhost
+  connection: local
+  vars_files:
+   - vars/vault.yml
+   - vars/gather-dbfacts-vars.yml
+  roles:
+     - { role: oradb_gather_dbfacts }

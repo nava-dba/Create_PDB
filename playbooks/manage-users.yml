@@ -1,0 +1,13 @@
+# Playbook to manage user and the user grants.
+# Before executing this playbook, please refer the documentation in collection_dir/docs directory.
+#
+- name: Create DB User
+  hosts: localhost              
+  remote_user: oracle           # Oracle Database Username
+  gather_facts: false
+  vars_files:
+   - vars/vault.yml
+   - vars/manage-users-vars.yml
+  roles:
+     - { role: oradb_manage_users }
+     - { role: oradb_manage_grants }

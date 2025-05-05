@@ -1,0 +1,11 @@
+# Playbook to create ACFS on Oracle Standalone Grid Infrastructure.
+# Before executing this playbook, please refer the documentation inside the collection_dir/docs directory.
+#
+- name: Create ACFS SI
+  gather_facts: no
+  hosts: all                            # AIX Lpar Hostname defined in ansible inventory.
+  remote_user: oracle                   # Grid home owner.
+  vars_files:
+   - vars/manage-acfs-vars.yml
+  roles:
+     - {role: manage_acfs }

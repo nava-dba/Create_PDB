@@ -1,0 +1,7 @@
+- name: Return GI facts
+  oracle_gi_facts:
+  environment: "{{ oracle_env }}"
+  register: gifacts
+#  ignore_errors: true
+- debug:
+   var: gifacts

@@ -1,0 +1,25 @@
+hostgroup: "{{ group_names[0] }}"
+oracle_dbca_rsp: "dbca_{{ item.0.oracle_db_name }}.rsp"        # Name of responsefile used by dbca. One per database
+oracle_netca_rsp: "netca_{{ item.home }}_{{ listener_name_template }}.rsp"
+oracle_user_home: "/home/{{ oracle_user }}" # Home directory for oracle_user. Needed for passing in ssh-keys, profiles etc
+oracle_home_db: "{% if item.0 is defined %}{% if item.0.oracle_home is defined %}{{ item.0.oracle_home}}{% else %}{{ oracle_base }}/{{ item.0.oracle_version_db }}/{{ item.0.home }}{% endif %}{% else %}{% if item.oracle_home is defined %}{{ item.oracle_home }}{% else %}{{ oracle_base }}/{{ item.oracle_version_db }}/{{ item.home }}{% endif %}{% endif %}"
+oracle_rsp_stage: "{{ oracle_stage }}/rsp"
+oracle_profile_name: ".profile_{{ item.oracle_db_name }}"       # Name of profile-file. Sets up the environment for that database. One per database
+datafile_dest: "{% if item.0.storage_type|upper == 'FS' %}{{ oracle_dbf_dir_fs }}{% elif item.0.storage_type|upper == 'ASM' %}{{ oracle_dbf_dir_asm }}{% else %}{% endif %}"
+recoveryfile_dest: "{% if item.0.storage_type|upper == 'FS' %}{{ oracle_reco_dir_fs }}{% elif item.0.storage_type|upper == 'ASM' %}{{ oracle_reco_dir_asm }}{% else %}{% endif %}"
+configure_cluster: True   # Set it true when creating RAC database
+oracle_install_option_gi: "none"
+oracle_gi_cluster_type: STANDARD
+hostgroup_hub: "{{ hostgroup }}-hub"
+hostgroup_leaf: "{{ hostgroup }}-leaf"
+create_listener: "{% if oracle_install_option_gi is defined %}False{% elif oracle_install_option_gi is undefined %}{% if item.listener_name is defined %}True{% else %}False{% endif %}{% endif %}"
+listener_name_template: "{% if item.listener_name is defined %}{{ item.listener_name }}{% else %}{{ listener_name }}{% endif %}"
+listener_protocols_template: "{% if item.listener_protocols is defined %}{{ item.listener_protocols }}{% else %}{{ listener_protocols }}{% endif %}"
+listener_port_template: "{% if item.listener_port is defined %}{{ item.listener_port }}{% else %}{{ listener_port }}{% endif %}"
+listener_name: ANSILIST
+listener_protocols: TCP
+listener_port: 1521
+autostartup_service: false
+
+dbca_templatename: General_Purpose.dbc
+dbca_initParams: "{% if '19.3' in item.0.oracle_version_db %} -initParams db_name={{item.0.oracle_db_name}}{% if item.0.oracle_db_unique_name is defined %},db_unique_name={{item.0.oracle_db_unique_name}}{% endif %}{% endif %}"
