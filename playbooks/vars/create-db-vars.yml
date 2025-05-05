@@ -1,7 +1,7 @@
 # Create/Drop database variables section
 oracle_user: oracle             # Provide the username who owns the Oracle Installations.
-oracle_group: oinstall    	# Primary group for oracle_user.
-oracle_stage: /tmp 		# Provide path on the target AIX lpar to stage response files.
+oracle_group: oinstall    # Primary group for oracle_user.
+oracle_stage: /tmp  # Provide path on the target AIX lpar to stage response files.
 oracle_base: /u01/base
 oracle_dbf_dir_fs: /u01/oradata                   # Provide path on the Lpar to store datafiles.
 oracle_reco_dir_fs: /u01/oradata                  # Provide path on the Lpar to store Flash recovery area files.
@@ -24,3 +24,4 @@ oracle_databases:                                     # Dictionary describing th
         service_name: testdb                           # Inital service to be created.
         state: present
         oracle_db_mem_percent: 40
+        redolog_size_in_mb: 50
