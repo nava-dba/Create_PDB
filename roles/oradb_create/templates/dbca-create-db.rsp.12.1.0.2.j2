@@ -661,12 +661,7 @@ NATIONALCHARACTERSET= "AL16UTF16"
 # Default value : None
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-{% if item.0.oracle_init_params is defined %}
-INITPARAMS ="{{ item.0.oracle_init_params }}"
-{% else %}
 #INITPARAMS =
-{% endif %}
-
 #-----------------------------------------------------------------------------
 # Name          : SAMPLESCHEMA
 # Datatype      : Boolean
@@ -697,7 +692,7 @@ MEMORYPERCENTAGE = "{{ item.0.oracle_db_mem_percent }}"
 # Default value : MULTIPURPOSE
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-DATABASETYPE = "{{ item.0.oracle_database_type }}"
+#DATABASETYPE = 
 
 #-----------------------------------------------------------------------------
 # Name          : AUTOMATICMEMORYMANAGEMENT
@@ -717,14 +712,7 @@ AUTOMATICMEMORYMANAGEMENT = "FALSE"
 # Default value :
 # Mandatory     : NO
 #-----------------------------------------------------------------------------
-{% if item.0.oracle_db_mem_totalmb is defined %}
-TOTALMEMORY = "{{ item.0.oracle_db_mem_totalmb }}"
-{% else %}
 #TOTALMEMORY =
-{% endif %}
-
-
-
 #-----------------------*** End of CREATEDATABASE section ***------------------------
 
 #-----------------------------------------------------------------------------
