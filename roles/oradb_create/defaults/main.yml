@@ -31,5 +31,5 @@ oracle_reco_dir_asm:
 oracle_db_mem_percent: 40
 redolog_size_in_mb: 50
 oracle_database_type:
-oracle_db_mem_totalmb:   # check if oracle_db_mem_percent superseeds 
+oracle_db_mem_totalmb:   
 service_name:
